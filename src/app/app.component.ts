@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 export class AppComponent implements OnInit {
   public selectedFile: File
   public form: FormGroup
+  public words: string[] = []
 
   constructor(private fb: FormBuilder) {}
 
@@ -33,18 +34,19 @@ export class AppComponent implements OnInit {
       }).promise
       const maxPages = pdf.numPages
 
-      const words = []
+      this.words = []
       for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
         const page = await pdf.getPage(pageNum)
         const content = await page.getTextContent()
-        words.push(
-          content.items
+        this.words.push(
+          ...content.items
             .map((item) => item.str)
             .filter((word: string) => word?.length > 0 && word != ' ')
         )
       }
-      console.log(words)
+      console.log(this.words)
     } else {
+      this.words = ['No file selected']
       console.log('No file selected.')
     }
   }
