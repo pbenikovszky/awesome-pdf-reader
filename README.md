@@ -4,4 +4,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-To run the app using hot module reload use `ng start:dev`
+To run the app using hot module reload use `npm run start:dev`
